@@ -1,17 +1,16 @@
 from math import *
-class rectangle:
-    def _init_(self,length,width):
-        self._length = length
-        self._width = width
+class Rectangle:
+    def __init__(self,length,width):
+        self.length = length
+        self.width = width
     def area(self):
-        return(self._length*self._width)
+        return self.length*self.width
     def perimiter(self):
-        return(2*(self._length+self._width))
+        return 2*(self.length+self.width)
     def diagonal(self):
-        return(sqrt(self._length*self._length+self._width*self._width))
+        return sqrt(self.length*self.length+self.width*self.width)
 
-big=rectangle
-big._init_(big,100,50)
-print(rectangle.area(big))
-print(rectangle.perimiter(big))
-print(rectangle.diagonal(big))
+big=Rectangle(3,4)
+print(big.area())
+print(big.perimiter())
+print(big.diagonal())
