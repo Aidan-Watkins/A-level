@@ -8,7 +8,7 @@ class Rectangle:
     def perimiter(self):
         return 2*(self.length+self.width)
     def diagonal(self):
-        return sqrt(self.length*self.length+self.width*self.width)
+        return sqrt(self.length**2+self.width**2)
 
 big=Rectangle(3,4)
 print(big.area())
