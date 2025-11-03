@@ -21,6 +21,11 @@ class Vector:
         return Vector(x,y)
     def __str__(self):
         return str(self.x)+","+str(self.y)
+    
+    def __mul__(self,scalar):
+        return self.x*scalar,self.x*scalar
+    def __rmul__(self,scalar):
+        return self.x*scalar,self.x*scalar
 
 def test():
     vec1=Vector(3,4)
