@@ -34,10 +34,13 @@ class LinkedList:
         pass
 
     def pop(self):
-        temp=self._head_node.get_data()
-        self._head_node=self._head_node.get_next()
-        self._size-=1
-        return temp
+        if self._size==0:
+            print("the queue has no items in it and so cannot have an item removed from it")
+        else:
+            temp=self._head_node.get_data()
+            self._head_node=self._head_node.get_next()
+            self._size-=1
+            return temp
         pass
 
     def peek(self):
@@ -74,3 +77,4 @@ if __name__ == "__main__":
 
     while not my_stack.is_empty():
         print(my_stack.pop())
+print(my_stack.pop())
