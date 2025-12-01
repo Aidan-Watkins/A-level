@@ -4,6 +4,7 @@ class Board:
         self.board = []
         for i in range(3):
             self.board.append([" "," "," "])
+
     def display(self):
         print("——————————")
         for row in self.board[::-1]:
@@ -11,20 +12,23 @@ class Board:
             for cell in row:
                 print(cell,"|",end="")
             print("\n——————————")
+
     def write(self,x,y,type):
         try:
             self.board[y][x]=type
         except:
             print("you cant write there")
+
     def read(self,x,y):
         if x>=0 and y>=0:
             try:
                 return self.board[y][x]
             except IndexError:
-                return("")
+                return ""
             except TypeError:
                 print("you need to use a number there")
-                return("")
+                return ""
+            
     def checkwin(self):
         for i in range(3):
             if self.read(i,0)==self.read(i,1) and self.read(i,0)==self.read(i,2) and self.read(i,0)!=" ":
@@ -37,6 +41,7 @@ class Board:
         if self.read(0,2)==self.read(1,1) and self.read(0,2)==self.read(2,0) and self.read(0,2)!=" ":
             return self.read(0,0)
         return "no one"
+    
     def checkspace(self):
         if " "in self.board:
             return False
@@ -49,21 +54,28 @@ class Board:
 #b1.display()
 
 class player():
+
     def __init__(self,char):
         self.symbol=char
+
     def type(self):
         return self.symbol
+    
 class robot(player):
+
     def __init__(self,char):
         super().__init__(char)
+
     def move(self):
         x=random.randint(0,2)
         y=random.randint(0,2)
         return x,y
 
 class human(player):
+
     def __init__(self,char):
         super().__init__(char)
+
     def move(self):
         print(f"{self.type()}'s go")
         try:
@@ -84,11 +96,13 @@ else:
 while True and b1.checkwin()=="no one" and b1.checkspace():
     b1.display()
     x,y=-1,-1
+while True and b1.checkwin()=="no one" and b1.checkspace():
     while b1.read(x,y)!=" ":
         x,y=player1.move()
     b1.write(x,y,player1.type())
     b1.display()
     x,y=-1,-1
+while True and b1.checkwin()=="no one" and b1.checkspace():
     while b1.read(x,y)!=" ":
         x,y=player2.move()
     b1.write(x,y,player2.type())
