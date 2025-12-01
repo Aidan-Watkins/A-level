@@ -47,12 +47,6 @@ class Board:
             return False
         return True
 
-
-#b1=Board()
-#b1.write(0,0,"X")
-#b1.write(1,1,"O")
-#b1.display()
-
 class player():
 
     def __init__(self,char):
@@ -84,7 +78,6 @@ class human(player):
         except ValueError:
             print("enter it as a number")
         return x,y
-
 
 b1=Board()
 player1=human(str(input("what symbol do you want player 1 to be")))
