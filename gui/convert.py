@@ -11,7 +11,7 @@ class MainWindow(qtw.QMainWindow):
         super().__init__()
         layout = qtw.QGridLayout()
 
-        self.setWindowTitle("window")
+        self.setWindowTitle("metres to feet")
 
         widget = qtw.QWidget()
 
@@ -33,9 +33,9 @@ class MainWindow(qtw.QMainWindow):
     def go_click(self):
         convert=self.textbox.text()
         try:
-            self.value=str(int(convert)*3)
+            self.value="feet  "+str(int(convert)*3.28)
         except:
-            self.value="?"
+            self.value="feet  ?"
         self.label.setText(self.value)
         
 app = qtw.QApplication([])
