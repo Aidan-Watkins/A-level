@@ -35,20 +35,22 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
     def open_btn_click(self):
-        filename, _ = QFileDialog.getOpenFileName(self, "Open File", ".", "Text Files (*.txt *.html)")
-        file=open(filename,"r")
-        self.textedit.setPlainText(file.read())
-        file.close()
-
-        print(filename)
+        self.filename, _ = QFileDialog.getOpenFileName(self, "Open File", ".", "Text Files (*.txt *.html)")
+        try:
+            file=open(self.filename,"r")
+            self.textedit.setPlainText(file.read())
+            file.close()
+        except:
+            print(self.filename)
 
     def save_btn_click(self):
-        filename, _ = QFileDialog.getSaveFileName(self, "Save File", ".", "Text Files (*.txt *.html)")
-        file=open(filename,"w")
-        file.write(self.textedit.toPlainText())
-        file.close()
-
-        print(filename)
+        self.filename, _ = QFileDialog.getSaveFileName(self, "Save File", ".", "Text Files (*.txt *.html)")
+        try:
+            file=open(self.filename,"w")
+            file.write(self.textedit.toPlainText())
+            file.close()
+        except:
+            print(self.filename)
 
 
     def quit(self):
