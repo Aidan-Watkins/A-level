@@ -36,7 +36,7 @@ class MainWindow(qtw.QMainWindow):
     def go_click(self):
         convert=self.textbox.text()
         try:
-            self.value="feet:  "+str(float(convert)*3.28)
+            self.value="feet:  "+str(round((float(convert)*3.28),5))
         except:
             self.value="feet:  ?"
         self.label.setText(self.value)
