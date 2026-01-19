@@ -54,7 +54,18 @@ class MainWindow(QMainWindow):
 
 
     def quit(self):
-        dlg = QMessageBox.warning(self, "Quit?", "Are you sure", QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
+        try:
+            file=open(self.filename,"r")
+            data=file.read()
+            file.close()
+        except:
+            print("file not found")
+            data=""
+        if data!=self.textedit.toPlainText():
+            dlg = QMessageBox.warning(self, "Quit?", "Are you sure you have unsaved changes", QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
+        else:
+            dlg = QMessageBox.warning(self, "Quit?", "Are you sure", QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
+        
         print(dlg)
         if dlg == QMessageBox.StandardButton.Ok:
             # qtc.QCoreApplication.quit()
