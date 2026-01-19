@@ -10,31 +10,21 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("text edit")
 
         layout = QVBoxLayout()
-        buttons=QHBoxLayout()
+        menubar = self.menuBar()
+        file_menu = menubar.addMenu("&File")
+
+        file_menu.addAction("&Open", self.open_file)
+        file_menu.addAction("&Save", self.save_file)
+        file_menu.addSeparator()
+        file_menu.addAction("&Exit", self.quit)
 
         self.textedit=QTextEdit()
         layout.addWidget(self.textedit)
-        # Create another button
-        quit_btn = QPushButton("Quit")
-        quit_btn.clicked.connect(self.quit)
-        buttons.addWidget(quit_btn)
-
-        # Create another button
-        open_btn = QPushButton("Open")
-        open_btn.clicked.connect(self.open_btn_click)
-        buttons.addWidget(open_btn)
-
-        # Create another button
-        save_btn = QPushButton("Save")
-        save_btn.clicked.connect(self.save_btn_click)
-        buttons.addWidget(save_btn)
-        layout.addLayout(buttons)
-        # Create the windows central widget
         widget = QWidget()
         widget.setLayout(layout)
         self.setCentralWidget(widget)
 
-    def open_btn_click(self):
+    def open_file(self):
         self.filename, _ = QFileDialog.getOpenFileName(self, "Open File", ".", "Text Files (*.txt *.html)")
         try:
             file=open(self.filename,"r")
@@ -43,7 +33,7 @@ class MainWindow(QMainWindow):
         except:
             print(self.filename)
 
-    def save_btn_click(self):
+    def save_file(self):
         self.filename, _ = QFileDialog.getSaveFileName(self, "Save File", ".", "Text Files (*.txt *.html)")
         try:
             file=open(self.filename,"w")
