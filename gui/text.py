@@ -1,8 +1,5 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, \
-    QPushButton, QVBoxLayout, QTextEdit, QColorDialog, QMessageBox, QFileDialog,QHBoxLayout
-import PyQt6.QtCore as qtc 
-
+from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QVBoxLayout, QTextEdit, QMessageBox, QFileDialog , QPushButton
 class MainWindow(QMainWindow):
     def __init__(self, app):
         super().__init__()
@@ -14,9 +11,10 @@ class MainWindow(QMainWindow):
         file_menu = menubar.addMenu("&File")
 
         file_menu.addAction("&Open", self.open_file)
-        file_menu.addAction("&Save", self.save_file)
+        file_menu.addAction("&Save as", self.save_file)
+        file_menu.addAction("Sa&ve", self.save)
         file_menu.addSeparator()
-        file_menu.addAction("&Exit", self.quit)
+        file_menu.addAction("E&xit", self.quit)
 
         self.textedit=QTextEdit()
         layout.addWidget(self.textedit)
@@ -41,6 +39,13 @@ class MainWindow(QMainWindow):
             file.close()
         except:
             print(self.filename)
+    def save(self):
+        try:
+            file=open(self.filename,"w")
+            file.write(self.textedit.toPlainText())
+            file.close()
+        except:
+            print(self.filename)
 
 
     def quit(self):
@@ -52,13 +57,11 @@ class MainWindow(QMainWindow):
             print("file not found")
             data=""
         if data!=self.textedit.toPlainText():
-            dlg = QMessageBox.warning(self, "Quit?", "Are you sure you have unsaved changes", QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
-        else:
-            dlg = QMessageBox.warning(self, "Quit?", "Are you sure", QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
-        
-        print(dlg)
-        if dlg == QMessageBox.StandardButton.Ok:
+            dlg = QMessageBox.warning(self, "Exit?", "Are you sure you have unsaved changes", QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
+            if dlg == QMessageBox.StandardButton.Ok:
             # qtc.QCoreApplication.quit()
+                self.app.quit()
+        else:
             self.app.quit()
 
 
