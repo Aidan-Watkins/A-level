@@ -1,7 +1,7 @@
-from flask import Flask,request,render_template
+from flask import Flask,request,render_template,redirect
 import datetime
 app = Flask(__name__)
-
+comments=[]
 @app.route('/')
 def get_name():
     return render_template('hello_submit_form.html')
@@ -48,5 +48,21 @@ def bday():
     return (f'Age at next birthday: {age}<br>'
     f'Days to next birthday: {days_to_birthday}<br>'
     f'Next birthday: {next_birthday}')
+@app.route('/comment', methods = ['POST','GET'])
+def commentpage():
+    if request.method == "get":
+        file=open("comments.txt","r")
+        comments=file
+        file.close()
+        return render_template("comment.html", comments=comments)
+    elif request.method=="post":
+        file=open("comments.txt","a")
+        file.append(request.form['comment'])
+        file.close()
+        return redirect("/comment")
+    file=open("comments.txt","r")
+    comments=file.readline()
+    file.close()
+    return render_template("comment.html", comments=comments)
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
